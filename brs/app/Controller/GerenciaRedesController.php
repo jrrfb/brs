@@ -5,7 +5,8 @@
             function index() {
               if(!empty($this->request->data)){
                App::import('Lib','SnmpLib');
-               $snmp_retorno = SnmpLib::buscarInformacoesHost($this->request->data);
+               $sl = new SnmpLib();
+               $snmp_retorno = $sl->buscarInformacoesHost($this->request->data);
                if(!$snmp_retorno){
                 $snmp_retorno ='false';
                }

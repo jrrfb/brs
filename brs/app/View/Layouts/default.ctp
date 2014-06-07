@@ -28,7 +28,7 @@ $cakeVersion = __d('brs_dev', 'Version 1.0')
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
-		//echo $this->Html->meta('icon');
+		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('cake.generic');
 
