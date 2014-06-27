@@ -1,18 +1,26 @@
   <?php
     class SnmpLib {
+      
+      public function getInterfacesToTcpdump(){
+        $snmp_interfaces = snmpwalk('127.0.0.1', 'jose', '1.3.6.1.2.1.2.2.1.2');
+        $interfaces = self::getInterfaces($snmp_interfaces);
+        return $interfaces;
+      }
+      
       public static function buscarInformacoesHost($array_snmp){
           return self::retornarDadosConformeFuncaoSnmp($array_snmp);
-          
           
       }
       
       public static function retornarDadosConformeFuncaoSnmp($array_snmp){
-        debug($array_snmp);
+        
+        
         $indice_funcao_snmp = $array_snmp['GerenciaRede']['comando_snmp'];
         $host_ip = $array_snmp['GerenciaRede']['ip'];
         if(!empty($array_snmp['GerenciaRede']['oid'])){
-        $oid = $array_snmp['GerenciaRede']['oid'];
+          $oid = $array_snmp['GerenciaRede']['oid'];
         }
+        
         $community = 'jose';
       
         if($indice_funcao_snmp == '1'){
@@ -41,7 +49,6 @@
            $snmp_softwares_rodando_ram = snmpwalk($host_ip, $community,'1.3.6.1.2.1.25.5.1.1.2');
            $snmp_softwares_rodando_cpu = snmpwalk($host_ip, $community,'1.3.6.1.2.1.25.5.1.1.1');
         
-        
             $dados_snmp['up_time'] = self::getUptime($snmp_system);
             $dados_snmp['descricao_system'] = self::getDescricaoSystem($snmp_system);
             $dados_snmp['localizacao']  =  self::getLocalizacao($snmp_system);
@@ -58,14 +65,8 @@
             $dados_snmp['softwares_data'] = self::getSoftwaresData($snmp_softwares_data);
             $dados_snmp['softwares_rodando'] = self::getSoftwaresRodando($snmp_softwares_rodando);
             $dados_snmp['softwares_rodando_ram'] = self::getSoftwaresRodandoRam($snmp_softwares_rodando_ram);
-            $dados_snmp['softwares_rodando_cpu'] = self::getSoftwaresRodandoCpu($snmp_softwares_rodando_cpu);
-            
-            
-            debug($dados_snmp);
-              exit;
-          
-          
-          
+            $dados_snmp['softwares_rodando_cpu'] = self::getSoftwaresRodandoCpu($snmp_softwares_rodando_cpu);          
+            return $dados_snmp;
            }
            
            return 'Não foi possível executar o comando snmpwalk!'; 

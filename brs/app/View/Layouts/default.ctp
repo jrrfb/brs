@@ -16,32 +16,30 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$nome_ferramenta = __d('brs_dev', 'BRS');
-$cakeVersion = __d('brs_dev', 'Version 1.0')
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $nome_ferramenta ?>:
+		
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('cake.generic');
-
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
-		echo $this->Html->script('jquery-2.1.1.min.js');
+		echo $this->Html->css('site');
+		echo $this->Html->script('jquery.min.js');
+		echo $this->Html->script('jquery-ui11/jquery-ui.min.js');
 	?>
 </head>
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $this->Html->link($nome_ferramenta, ''); ?></h1>
+			<h1>BRS     <a style="margin-left: 910px;color:#000000;font-size: 20px" target="_blank" href='<?php echo $this->Html->url('../alertas'); ?>'>Configurar Alertas</a></h1>
 		</div>
 		<div id="content">
 
@@ -50,14 +48,8 @@ $cakeVersion = __d('brs_dev', 'Version 1.0')
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $nome_ferramenta, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-				);
-			?>
+		
 			<p>
-				<?php echo $cakeVersion; ?>
 			</p>
 		</div>
 	</div>
